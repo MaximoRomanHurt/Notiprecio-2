@@ -1,28 +1,26 @@
+# database/postgres_connector.py
 import psycopg2
 import pandas as pd
 
-# --- TU CONFIGURACIÓN ---
+# --- ESTA VARIABLE DEBE ESTAR AQUÍ ARRIBA (VARIABLES GLOBALES) ---
 DB_CONFIG = {
-    'dbname': '..',    # OJO: Cambié 'postgres' por 'Products' según tu comentario
+   'dbname': '..',    # OJO: Cambié 'postgres' por 'Products' según tu comentario
     'user': '..',
     'password': "..", 
     'host': '...',
     'port': '...'
 }
-    
+
 def obtener_conexion():
     try:
-        # El ** desempaqueta el diccionario y lo pasa como argumentos
+        # Usamos la variable DB_CONFIG que definimos arriba
         conn = psycopg2.connect(**DB_CONFIG)
         return conn
     except Exception as e:
         print(f"Error conectando a la BD: {e}")
         return None
 
-# --- FUNCIONES DE GUARDADO Y LECTURA ---
-
 def guardar_datos_scraping(lista_datos):
-    """Guarda lo que trae el scraper en la tabla de precios"""
     conn = obtener_conexion()
     if not conn: return
     
@@ -31,8 +29,6 @@ def guardar_datos_scraping(lista_datos):
         nuevos = 0
         
         for item in lista_datos:
-            # Insertamos en la tabla 'precios_variables' (o como hayas llamado a tu tabla)
-            # Asegúrate que tu tabla en Postgres tenga estos campos
             cur.execute("""
                 INSERT INTO precios_variables (fecha_registro, tienda, nombre_producto, precio_mercado, url)
                 VALUES (NOW(), %s, %s, %s, %s)
@@ -44,20 +40,18 @@ def guardar_datos_scraping(lista_datos):
             
         conn.commit()
         cur.close()
-        return f"Se actualizaron {nuevos} registros en la Base de Datos."
+        return f"Se actualizaron {nuevos} registros."
     except Exception as e:
         conn.rollback()
-        return f"Error guardando en BD: {e}"
+        return f"Error guardando: {e}"
     finally:
         conn.close()
 
 def obtener_reporte_bolsa():
-    """Lee los datos para la gráfica del Dashboard"""
     conn = obtener_conexion()
     if not conn: return pd.DataFrame()
     
     try:
-        # Asegúrate de haber creado la VISTA 'vista_reporte_bolsa' en tu SQL
         query = "SELECT * FROM vista_reporte_bolsa ORDER BY diferencia DESC"
         df = pd.read_sql_query(query, conn)
         return df
