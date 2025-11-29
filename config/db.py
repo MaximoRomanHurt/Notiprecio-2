@@ -4,11 +4,11 @@ from mysql.connector import Error
 def get_connection():
     try:
         connection = mysql.connector.connect(
-            host="IP_DE_TU_AMIGO",
-            port=3306,
+            host="172.20.64.1",
+            port=5432:5432,
             user="admin",
             password="admin123",
-            database="precios_db"
+            database="01_int.sql"
         )
         return connection
 

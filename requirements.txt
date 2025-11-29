@@ -1,5 +1,17 @@
-mysql-connector-python
+# --- Scraping Dinámico ---
+selenium
+webdriver-manager
+
+# --- Base de Datos ---
+psycopg2-binary
+sqlalchemy
+
+# --- Gestión de Configuración (Seguridad) ---
+python-dotenv
+
+# --- Procesamiento de Datos (Opcional pero recomendado) ---
+pandas
+
+# --- Legacy / Utilidades (Puedes mantenerlos si los usas en otros scripts) ---
 requests
 beautifulsoup4
-customtkinter
-matplotlib

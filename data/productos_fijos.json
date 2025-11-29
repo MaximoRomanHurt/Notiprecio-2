@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "nombre_referencia": "Aceite Primor 900ml",
+        "palabras_clave": ["primor", "900"],
+        "precio_fijo": 8.50
+    },
+    {
+        "id": 2,
+        "nombre_referencia": "Arroz Costeño 5kg",
+        "palabras_clave": ["arroz", "costeño", "5kg"],
+        "precio_fijo": 21.00
+    },
+    {
+        "id": 3,
+        "nombre_referencia": "Leche Gloria 6pack",
+        "palabras_clave": ["gloria", "pack"],
+        "precio_fijo": 24.00
+    },
+    {
+        "id": 4,
+        "nombre_referencia": "Azucar Rubia 5kg",
+        "palabras_clave": ["azucar", "rubia", "5kg"],
+        "precio_fijo": 20.00
+    }
+]
